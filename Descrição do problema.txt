@@ -1,0 +1,6 @@
+* todos os componentes possuem largura menor que 900
+* todos os componentes possuem altura menor que 600
+* não há nenhum espaçamento entre os componentes
+* tamanho mínimo da janela trancado em 900x600
+Contudo, ao rodar o programa a janela pode ser ajustada para um
+tamanho um pouco menor
