@@ -6,3 +6,5 @@ Contudo, ao rodar o programa a janela pode ser ajustada para um
 tamanho um pouco menor
 
 testes posteriores indicam que o tamanho da tela após execução é de 916x651
+
+Codigo atualizado possui mensagens de debug que mostram na area de texto a altura e largura dos componentes
