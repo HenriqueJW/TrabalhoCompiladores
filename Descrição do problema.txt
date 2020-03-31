@@ -1,6 +1,8 @@
-* todos os componentes possuem largura menor que 900
-* todos os componentes possuem altura menor que 600
-* n�o h� nenhum espa�amento entre os componentes
-* tamanho m�nimo da janela trancado em 900x600
+* todos os componentes possuem largura menor ou igual a 900
+* todos os componentes possuem altura menor ou igual a 600
+* não há nenhum espaçamento entre os componentes
+* tamanho mínimo da janela trancado em 900x600
 Contudo, ao rodar o programa a janela pode ser ajustada para um
 tamanho um pouco menor
+
+testes posteriores indicam que o tamanho da tela após execução é de 916x651
