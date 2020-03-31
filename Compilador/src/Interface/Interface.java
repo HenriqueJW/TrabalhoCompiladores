@@ -4,32 +4,47 @@ import Persistencia.CarregadorArquivos;
 import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
+import java.io.FileWriter;
 import java.util.LinkedList;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.DefaultEditorKit;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Micro
  */
 public class Interface extends javax.swing.JFrame {
-   
+
     /**
      * Creates new form Interface
      */
     public Interface() {
         initComponents();
-        AreaTexto.setBorder(new NumeredBorder());
+        AreaTexto.setText("Altura: \n " + jPanel1.getHeight() + "\n"
+        + AreaTexto.getHeight()+ "\n"
+        + AreaMensagens.getHeight()+ "\n"
+        + AreaStatus.getHeight() +"\n  \n Largura: \n"
+        + jPanel1.getWidth()+ "\n"
+                
+        + jScrollPane1.getWidth()+ "\n"
+        + AreaTexto.getWidth()+ "\n"
+                + jScrollPane2.getWidth()+ "\n"
+        + AreaMensagens.getWidth()+ "\n"
+                + jScrollPane3.getWidth()+ "\n"
+        + AreaStatus.getWidth()+"\n"
+        );
         
-       
     }
 
     /**
@@ -47,14 +62,16 @@ public class Interface extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton(new DefaultEditorKit.CopyAction());
+        jButton11 = new javax.swing.JButton(new DefaultEditorKit.PasteAction());
+        jButton10 = new javax.swing.JButton(new DefaultEditorKit.CutAction());
         jButton13 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        AreaMensagens = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        AreaStatus = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 900, 600));
@@ -67,9 +84,14 @@ public class Interface extends javax.swing.JFrame {
         jScrollPane1.setAutoscrolls(true);
         jScrollPane1.setMinimumSize(new java.awt.Dimension(900, 400));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(900, 400));
+        jScrollPane1.setSize(new java.awt.Dimension(900, 400));
 
         AreaTexto.setColumns(20);
+        AreaTexto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        AreaTexto.setMinimumSize(new java.awt.Dimension(900, 400));
+        AreaTexto.setSize(new java.awt.Dimension(900, 400));
         jScrollPane1.setViewportView(AreaTexto);
+        AreaTexto.setBorder(new NumeredBorder());
 
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setAlignmentY(0.0F);
@@ -144,6 +166,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton8);
+        jButton8.setMnemonic(KeyEvent.VK_C);
 
         jButton11.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/Imagens/32/Paste-icon.png"))); // NOI18N
@@ -160,6 +183,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton11);
+        jButton11.setMnemonic(KeyEvent.VK_P);
 
         jButton10.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/Imagens/32/cut-icon.png"))); // NOI18N
@@ -176,6 +200,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton10);
+        jButton10.setMnemonic(KeyEvent.VK_T);
 
         jButton13.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/Imagens/32/compile-icon.png"))); // NOI18N
@@ -212,33 +237,46 @@ public class Interface extends javax.swing.JFrame {
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setMinimumSize(new java.awt.Dimension(900, 100));
-        jScrollPane2.setViewportView(jTextArea2);
+        AreaMensagens.setColumns(20);
+        AreaMensagens.setRows(5);
+        AreaMensagens.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        AreaMensagens.setFocusable(false);
+        AreaMensagens.setMinimumSize(new java.awt.Dimension(900, 100));
+        jScrollPane2.setViewportView(AreaMensagens);
 
         jPanel2.setMinimumSize(new java.awt.Dimension(900, 30));
         jPanel2.setPreferredSize(new java.awt.Dimension(900, 30));
+
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        AreaStatus.setEditable(false);
+        AreaStatus.setColumns(20);
+        AreaStatus.setRows(5);
+        AreaStatus.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        AreaStatus.setFocusable(false);
+        AreaStatus.setMinimumSize(new java.awt.Dimension(900, 16));
+        jScrollPane3.setViewportView(AreaStatus);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane3)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,11 +294,12 @@ public class Interface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
+        AreaMensagens.setText("(compilação de programas ainda não foi implementada)");
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
+        AreaMensagens.setText("Desenvolvedores: Henrique José Wilbert\n"
+                + "e Célio Rodrigues Júnior");
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -272,35 +311,70 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+        if (AreaStatus.getText().equals("")) {
+            JFileChooser chooser = new JFileChooser();
+            int opc = chooser.showSaveDialog(null);
+            if (opc == JFileChooser.APPROVE_OPTION) {
+                try {
+                    FileWriter fw = new FileWriter(chooser.getSelectedFile() + ".txt");
+                    fw.write(AreaTexto.getText());
+                    fw.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                AreaMensagens.setText("");
+                AreaStatus.setText(chooser.getSelectedFile().getPath());
+            }
+        }else{
+            try {
+                    FileWriter fw = new FileWriter(AreaStatus.getText() + ".txt");
+                    fw.write(AreaTexto.getText());
+                    fw.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            AreaMensagens.setText("");
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        
+        String str = AreaTexto.getSelectedText();
+        
+        AreaTexto.getTransferHandler();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         JFileChooser chooser = new JFileChooser();
+        chooser.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                ".txt", "txt");
+                "Arquivo de Texto", "txt");
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(null);
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
-            System.out.println("Arquivo escolhido: " +
-                    chooser.getSelectedFile().getName());
-        }
-        
-//        LinkedList<String> lista = CarregadorArquivos.carrega(chooser.getSelectedFile().getPath());
-    String lista = CarregadorArquivos.carrega(chooser.getSelectedFile().getPath());
-    AreaTexto.append(lista);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            //        LinkedList<String> lista = CarregadorArquivos.carrega(chooser.getSelectedFile().getPath());
+            String caminho = chooser.getSelectedFile().getPath();
+            String lista = CarregadorArquivos.carrega(caminho);
+            AreaTexto.setText(lista);
 //        while(!lista.isEmpty()){
 //            AreaTexto.append(lista.removeFirst() + "\n");
 //        }
-        pack();
+            AreaTexto.setCaretPosition(0);
+            AreaMensagens.setText("");
+            AreaStatus.setText(caminho);
+            pack();
+        }
+        if (returnVal == JFileChooser.CANCEL_OPTION) {
+
+        }
+
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
+        AreaTexto.setText("");
+        AreaMensagens.setText("");
+        AreaStatus.setText("");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
@@ -335,8 +409,8 @@ public class Interface extends javax.swing.JFrame {
             public void run() {
                 Interface a = new Interface();
                 a.setVisible(true);
-                a.setMinimumSize(new Dimension(900,600));
-                
+                a.setMinimumSize(new Dimension(900, 600));
+
 //    a.addComponentListener(new ComponentAdapter() {
 //      public void componentResized(ComponentEvent evt) {
 //        Dimension size = a.getSize();
@@ -352,14 +426,13 @@ public class Interface extends javax.swing.JFrame {
 //    a.setSize(900, 600);
 //    a.setVisible(true);
 //    
-  
-   
-               
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea AreaMensagens;
+    private javax.swing.JTextArea AreaStatus;
     private javax.swing.JTextArea AreaTexto;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -373,6 +446,6 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }
