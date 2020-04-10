@@ -24,41 +24,6 @@ public class Interface extends javax.swing.JFrame {
      */
     public Interface() {
         initComponents();
-        
-        
-        Interface a = this;
-        
-        new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				while (true) {
-					
-						
-        AreaTexto.setText(
-        "Tamanho dos Componentes: \n\n"
-        + "Barra de Ferramentas: " + jPanel1.getWidth() + "x" + jPanel1.getHeight() + " px \n\n"
-        + "Editor de Texto: " + Rolagem1.getWidth() + "x" + Rolagem1.getHeight() + " px \n\n"
-        + "Area de Mensagens: " + Rolagem2.getWidth() + "x" + Rolagem2.getHeight() + "px \n\n"
-        + "Area de Status: " + Painel2.getWidth() + "x" + Painel2.getHeight() +"px \n\n"
-                
-        + "Largura da Tela: " + a.getWidth() + "x" + a.getHeight()+ " px"
-        
-        );
-					
-					try {
-						Thread.sleep(500);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-
-				}
-
-			}
-
-		}).start();
-        
-        
     }
 
     /**
@@ -88,10 +53,9 @@ public class Interface extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 900, 600));
-        setMinimumSize(new java.awt.Dimension(920, 620));
-        setPreferredSize(new java.awt.Dimension(920, 620));
-        setSize(new java.awt.Dimension(920, 620));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setMinimumSize(new java.awt.Dimension(920, 650));
+        setPreferredSize(new java.awt.Dimension(920, 650));
+        setSize(new java.awt.Dimension(920, 650));
 
         Rolagem1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         Rolagem1.setToolTipText("");
@@ -107,8 +71,6 @@ public class Interface extends javax.swing.JFrame {
         AreaTexto.setSize(new java.awt.Dimension(900, 400));
         Rolagem1.setViewportView(AreaTexto);
         AreaTexto.setBorder(new NumeredBorder());
-
-        getContentPane().add(Rolagem1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, -1, -1));
 
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setAlignmentY(0.0F);
@@ -251,8 +213,6 @@ public class Interface extends javax.swing.JFrame {
         });
         jPanel1.add(jButton12);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
         Rolagem2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         Rolagem2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         Rolagem2.setMinimumSize(new java.awt.Dimension(900, 100));
@@ -263,8 +223,6 @@ public class Interface extends javax.swing.JFrame {
         AreaMensagens.setFocusable(false);
         AreaMensagens.setMinimumSize(new java.awt.Dimension(900, 100));
         Rolagem2.setViewportView(AreaMensagens);
-
-        getContentPane().add(Rolagem2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 900, 100));
 
         Painel2.setMinimumSize(new java.awt.Dimension(900, 30));
         Painel2.setPreferredSize(new java.awt.Dimension(900, 30));
@@ -282,9 +240,9 @@ public class Interface extends javax.swing.JFrame {
         Painel2Layout.setHorizontalGroup(
             Painel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Painel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(AreaStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(AreaStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         Painel2Layout.setVerticalGroup(
             Painel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +252,26 @@ public class Interface extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        getContentPane().add(Painel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, -1, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Rolagem1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Rolagem2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Painel2, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(Rolagem1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(Rolagem2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(Painel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -322,7 +299,14 @@ public class Interface extends javax.swing.JFrame {
             int opc = chooser.showSaveDialog(null);
             if (opc == JFileChooser.APPROVE_OPTION) {
                 try {
-                    FileWriter fw = new FileWriter(chooser.getSelectedFile() + ".txt");
+                    String nome = chooser.getSelectedFile().toString();
+                FileWriter fw;
+                if(nome.endsWith(".txt")){
+                     fw = new FileWriter(nome);
+                }else{
+                     fw = new FileWriter(nome + ".txt");
+                }
+                
                     fw.write(AreaTexto.getText());
                     fw.close();
                 } catch (Exception ex) {
@@ -333,7 +317,13 @@ public class Interface extends javax.swing.JFrame {
             }
         }else{
             try {
-                    FileWriter fw = new FileWriter(AreaStatus.getText() + ".txt");
+                String nome = AreaStatus.getText();
+                FileWriter fw;
+                if(nome.endsWith(".txt")){
+                     fw = new FileWriter(AreaStatus.getText());
+                }else{
+                     fw = new FileWriter(AreaStatus.getText() + ".txt");
+                }
                     fw.write(AreaTexto.getText());
                     fw.close();
                 } catch (Exception ex) {
@@ -415,23 +405,7 @@ public class Interface extends javax.swing.JFrame {
             public void run() {
                 Interface a = new Interface();
                 a.setVisible(true);
-                //a.setMinimumSize(new Dimension(900, 600));
 
-//    a.addComponentListener(new ComponentAdapter() {
-//      public void componentResized(ComponentEvent evt) {
-//        Dimension size = a.getSize();
-//        Dimension min = a.getMinimumSize();
-//        if (size.getWidth() < min.getWidth()) {
-//          a.setSize((int) min.getWidth(), (int) size.getHeight());
-//        }
-//        if (size.getHeight() < min.getHeight()) {
-//          a.setSize((int) size.getWidth(), (int) min.getHeight());
-//        }
-//      }
-//    });
-//    a.setSize(900, 600);
-//    a.setVisible(true);
-//    
             }
         });
     }
