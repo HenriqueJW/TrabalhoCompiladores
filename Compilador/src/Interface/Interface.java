@@ -7,9 +7,18 @@ import AnalisadorLexico.LexicalError;
 import AnalisadorLexico.Token;
 import Persistencia.CarregadorArquivos;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.FileWriter;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.DefaultEditorKit;
 
@@ -29,7 +38,64 @@ public class Interface extends javax.swing.JFrame {
      */
     public Interface() {
         initComponents();
+        this.setTitle("Compilador Linguagem 2020.1");
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Interface/Imagens/32/compile-icon.png")).getImage()); 
+        adicionaAtalhos();
     }
+    
+    
+    private void adicionaAtalhos() {
+    JPanel contentPane = (JPanel) this.getContentPane();
+    InputMap iMap = contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+    ActionMap aMap = contentPane.getActionMap();
+    
+    
+    iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK), "Ctrl + n");
+    aMap.put("Ctrl + n", new AbstractAction() { 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        jButton4ActionPerformed(e);
+    }  
+  });
+    
+    
+    iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), "Ctrl + o");
+    aMap.put("Ctrl + o", new AbstractAction() { 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        jButton7ActionPerformed(e);
+    }  
+  });
+    
+    iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), "Ctrl + s");
+    aMap.put("Ctrl + s", new AbstractAction() { 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        jButton9ActionPerformed(e);
+    }  
+  });
+    
+    iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), "F9");
+    aMap.put("F9", new AbstractAction() { 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        jButton13ActionPerformed(e);
+    }  
+  });
+    
+    iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0), "F1");
+    aMap.put("F1", new AbstractAction() { 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        jButton12ActionPerformed(e);
+    }  
+  });
+    
+    
+    
+  }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -337,11 +403,22 @@ public class Interface extends javax.swing.JFrame {
                 mensagem += lexemastr + "\n";
                 
             }
+             AreaMensagens.setText(mensagem);
+            
         } catch (LexicalError e) {
-            System.err.println(e.getMessage() + "& quote;,em & quote;" + e.getPosition());
+            
+             int linha = 1;
+                int trava = e.getPosition();
+                for(int i = 0; i < trava; i++){
+                    if(texto[i] == '\n'){
+                        linha++;
+                    }
+                }
+                
+            System.err.println(e.getMessage() + " na linha " + linha);
         }
         
-        AreaMensagens.setText(mensagem);
+       
         
         
         
@@ -475,7 +552,7 @@ public class Interface extends javax.swing.JFrame {
                 Interface a = new Interface();
                 
                 a.setVisible(true);
-
+                a.getContentPane();
             }
         });
     }
