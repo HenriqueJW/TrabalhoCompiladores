@@ -17,41 +17,42 @@ public enum Classes {
     dec_hexa(new String[] {"12", null}),
     dec_int(new String[] {"13", null}),
     dec_str(new String[] {"14", null}),
-    laco_do(new String[] {"15", null}),
-    laco_whileFalse(new String[] {"16", null}),
-    cond_elif(new String[] {"17", null}),
-    cond_else(new String[] {"18", null}),
-    cond_if(new String[] {"19", null}),
-    fim_end(new String[] {"20", null}),
-    bool_false(new String[] {"21", null}),
-    bool_true(new String[] {"22", null}),
-    com_listen(new String[] {"23", null}),
-    com_speak(new String[] {"24", null}),
-    com_toInt(new String[] {"25", null}),
-    com_toBin(new String[] {"26", null}),
-    com_toHexa(new String[] {"27", null}),
-    TOKEN_28(new String[] {"28", "!"}), //"!"
-    TOKEN_29(new String[] {"29", "<"}), //"<"
-    TOKEN_30(new String[] {"30", ">"}), //">"
-    TOKEN_31(new String[] {"31", "#"}), //"#"
-    TOKEN_32(new String[] {"32", "("}), //"("
-    TOKEN_33(new String[] {"33", ")"}), //")"
-    TOKEN_34(new String[] {"34", "=="}), //"=="
-    TOKEN_35(new String[] {"35", "!="}), //"!="
-    TOKEN_36(new String[] {"36", "&"}), //"&"
-    TOKEN_37(new String[] {"37", "|"}), //"|"
-    TOKEN_38(new String[] {"38", "+"}), //"+"
-    TOKEN_39(new String[] {"39", "-"}), //"-"
-    TOKEN_40(new String[] {"40", "*"}), //"*"
-    TOKEN_41(new String[] {"41", "/"}), //"/"
-    TOKEN_42(new String[] {"42", ","}), //","
-    TOKEN_43(new String[] {"43", "."}), //"."
-    TOKEN_44(new String[] {"44", ";"}), //";"
-    TOKEN_45(new String[] {"45", ":"}), //":"
-    TOKEN_46(new String[] {"46", "="}), //"="
-    TOKEN_47(new String[] {"47", "+="}), //"+="
-    TOKEN_48(new String[] {"48", "-="}); //"-="
-
+    dec_float(new String[] {"15", null}),
+    laco_do(new String[] {"16", null}),
+    laco_whileFalse(new String[] {"17", null}),
+    cond_elif(new String[] {"18", null}),
+    cond_else(new String[] {"19", null}),
+    cond_if(new String[] {"20", null}),
+    fim_end(new String[] {"21", null}),
+    bool_false(new String[] {"22", null}),
+    bool_true(new String[] {"23", null}),
+    com_listen(new String[] {"24", null}),
+    com_speak(new String[] {"25", null}),
+    com_toInt(new String[] {"26", null}),
+    com_toBin(new String[] {"27", null}),
+    com_toHexa(new String[] {"28", null}),
+    TOKEN_28(new String[] {"29", "!"}), //"!"
+    TOKEN_29(new String[] {"30", "<"}), //"<"
+    TOKEN_30(new String[] {"31", ">"}), //">"
+    TOKEN_31(new String[] {"32", "#"}), //"#"
+    TOKEN_32(new String[] {"33", "("}), //"("
+    TOKEN_33(new String[] {"34", ")"}), //")"
+    TOKEN_34(new String[] {"35", "=="}), //"=="
+    TOKEN_35(new String[] {"36", "!="}), //"!="
+    TOKEN_36(new String[] {"37", "&"}), //"&"
+    TOKEN_37(new String[] {"38", "|"}), //"|"
+    TOKEN_38(new String[] {"39", "+"}), //"+"
+    TOKEN_39(new String[] {"40", "-"}), //"-"
+    TOKEN_40(new String[] {"41", "*"}), //"*"
+    TOKEN_41(new String[] {"42", "/"}), //"/"
+    TOKEN_42(new String[] {"43", ","}), //","
+    TOKEN_43(new String[] {"44", "."}), //"."
+    TOKEN_44(new String[] {"45", ";"}), //";"
+    TOKEN_45(new String[] {"46", ":"}), //":"
+    TOKEN_46(new String[] {"47", "="}), //"="
+    TOKEN_47(new String[] {"48", "+="}), //"+="
+    TOKEN_48(new String[] {"49", "-="}); //"-="
+    
     private String[] codigo;
 
     Classes(String[] codigo) {

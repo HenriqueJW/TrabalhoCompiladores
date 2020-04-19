@@ -1243,20 +1243,20 @@ public interface ScannerConstants
         {57, 37}
     };
 
-    int[] TOKEN_STATE = {-2,  0, 28, -1, 31, 36, 32, 33, 40, 38, 42, 39, 43, 41,  3,  3, 45, 44, 29, 46, 30,  2, 37,  0, 35,  7, -1, -1, 47, 48, -1, -2, 34,  2,  2,  5,  6,  4, -2,  2, -1,  0 };
+    int[] TOKEN_STATE = {-2,  0, 29, -1, 32, 37, 33, 34, 41, 39, 43, 40, 44, 42,  3,  3, 46, 45, 30, 47, 31,  2, 38,  0, 36,  7, -1, -1, 48, 49, -1, -2, 35,  2,  2,  5,  6,  4, -2,  2, -1,  0 };
 
     int[] SPECIAL_CASES_INDEXES =
-        { 0, 0, 0, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20 };
+        { 0, 0, 0, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21 };
 
     String[] SPECIAL_CASES_KEYS =
-        {  "bin", "bool", "def", "do", "elif", "else", "end", "false", "hexa", "if", "int", "listen", "main", "speak", "str", "toBin", "toHexa", "toInt", "true", "whileFalse" };
+        {  "bin", "bool", "def", "do", "elif", "else", "end", "false", "float", "hexa", "if", "int", "listen", "main", "speak", "str", "toBin", "toHexa", "toInt", "true", "whileFalse" };
 
     int[] SPECIAL_CASES_VALUES =
-        {  9, 10, 11, 15, 17, 18, 20, 21, 12, 19, 13, 23, 8, 24, 14, 26, 27, 25, 22, 16 };
+        {  9, 10, 11, 16, 18, 19, 21, 22, 15, 12, 20, 13, 24, 8, 25, 14, 27, 28, 26, 23, 17 };
 
     String[] SCANNER_ERROR =
     {
-        "Caractere n�o esperado",
+        "Caractere não esperado",
         "",
         "",
         "Erro identificando cte_str",
