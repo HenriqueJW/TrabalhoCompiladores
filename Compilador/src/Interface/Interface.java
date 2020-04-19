@@ -39,63 +39,56 @@ public class Interface extends javax.swing.JFrame {
     public Interface() {
         initComponents();
         this.setTitle("Compilador Linguagem 2020.1");
-        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Interface/Imagens/32/compile-icon.png")).getImage()); 
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Interface/Imagens/32/compile-icon.png")).getImage());
         adicionaAtalhos();
     }
-    
-    
+
     private void adicionaAtalhos() {
-    JPanel contentPane = (JPanel) this.getContentPane();
-    InputMap iMap = contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-    ActionMap aMap = contentPane.getActionMap();
-    
-    
-    iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK), "Ctrl + n");
-    aMap.put("Ctrl + n", new AbstractAction() { 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        jButton4ActionPerformed(e);
-    }  
-  });
-    
-    
-    iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), "Ctrl + o");
-    aMap.put("Ctrl + o", new AbstractAction() { 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        jButton7ActionPerformed(e);
-    }  
-  });
-    
-    iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), "Ctrl + s");
-    aMap.put("Ctrl + s", new AbstractAction() { 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        jButton9ActionPerformed(e);
-    }  
-  });
-    
-    iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), "F9");
-    aMap.put("F9", new AbstractAction() { 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        jButton13ActionPerformed(e);
-    }  
-  });
-    
-    iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0), "F1");
-    aMap.put("F1", new AbstractAction() { 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        jButton12ActionPerformed(e);
-    }  
-  });
-    
-    
-    
-  }
-    
-    
+        JPanel contentPane = (JPanel) this.getContentPane();
+        InputMap iMap = contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap aMap = contentPane.getActionMap();
+
+        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK), "Ctrl + n");
+        aMap.put("Ctrl + n", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jButton4ActionPerformed(e);
+            }
+        });
+
+        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), "Ctrl + o");
+        aMap.put("Ctrl + o", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jButton7ActionPerformed(e);
+            }
+        });
+
+        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), "Ctrl + s");
+        aMap.put("Ctrl + s", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jButton9ActionPerformed(e);
+            }
+        });
+
+        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), "F9");
+        aMap.put("F9", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jButton13ActionPerformed(e);
+            }
+        });
+
+        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0), "F1");
+        aMap.put("F1", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jButton12ActionPerformed(e);
+            }
+        });
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -349,8 +342,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         Lexico lexico = new Lexico();
-        
-        
+
         lexico.setInput(AreaTexto.getText());
         String mensagem = "Linha     Classe                              Lexema                      \n";
         char[] texto = AreaTexto.getText().toCharArray();
@@ -358,72 +350,70 @@ public class Interface extends javax.swing.JFrame {
         try {
             Token t = null;
             while ((t = lexico.nextToken()) != null) {
-                
+
                 //detecta linha
                 int linha = 1;
                 int trava = t.getPosition();
-                for(int i = 0; i < trava; i++){
-                    if(texto[i] == '\n'){
+                for (int i = 0; i < trava; i++) {
+                    if (texto[i] == '\n') {
                         linha++;
                     }
                 }
-                
+
                 //Monta string com espaços certos
                 String linhastr = Integer.toString(linha);
 
-                for(int i=linhastr.length(); i < 10; i++){
+                for (int i = linhastr.length(); i < 10; i++) {
                     linhastr += " ";
                 }
                 mensagem += linhastr;
-                
+
                 //Classe
                 String classe = Integer.toString(t.getId());
-                
+
                 String classestr;
-                if(Classes.get(classe).getCodigo()[1] != null){
+                if (Classes.get(classe).getCodigo()[1] != null) {
                     classestr = Classes.get(classe).getCodigo()[1];
-                }else{
+                } else {
                     classestr = Classes.get(classe).toString();
                 }
-                
-                
-                
-                for(int i= classestr.length(); i < 36; i++){
+
+                for (int i = classestr.length(); i < 36; i++) {
                     classestr += " ";
                 }
-                
+
                 mensagem += classestr;
-                
+
                 //Lexema
                 String lexemastr = t.getLexeme();
-                for(int i=lexemastr.length(); i < 22; i++){
+                for (int i = lexemastr.length(); i < 22; i++) {
                     lexemastr += " ";
                 }
-                
+
                 mensagem += lexemastr + "\n";
-                
+
             }
-             AreaMensagens.setText(mensagem);
-            
+            AreaMensagens.setText(mensagem);
+
         } catch (LexicalError e) {
-            
-             int linha = 1;
-                int trava = e.getPosition();
-                for(int i = 0; i < trava; i++){
-                    if(texto[i] == '\n'){
-                        linha++;
-                    }
+
+            int linha = 1;
+            int trava = e.getPosition();
+            for (int i = 0; i < trava; i++) {
+                if (texto[i] == '\n') {
+                    linha++;
                 }
-                
-            System.err.println(e.getMessage() + " na linha " + linha);
+            }
+
+            String mensagemErro = "Erro na linha " + linha + " - ";
+
+            if (e.getMessage().equals("símbolo inválido")) {
+                AreaMensagens.setText(mensagemErro + texto[e.getPosition()] + " " + e.getMessage());
+            } else {
+                AreaMensagens.setText(mensagemErro + e.getMessage());
+            }
         }
-        
-       
-        
-        
-        
-        
-        
+
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -480,8 +470,6 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
-        String str = AreaTexto.getSelectedText();
 
         AreaTexto.getTransferHandler();
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -550,7 +538,7 @@ public class Interface extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Interface a = new Interface();
-                
+
                 a.setVisible(true);
                 a.getContentPane();
             }

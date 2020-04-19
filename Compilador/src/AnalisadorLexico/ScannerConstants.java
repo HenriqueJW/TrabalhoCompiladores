@@ -1243,10 +1243,10 @@ public interface ScannerConstants
         {57, 37}
     };
 
-    int[] TOKEN_STATE = {-2,  0, 29, -1, 32, 37, 33, 34, 41, 39, 43, 40, 44, 42,  3,  3, 46, 45, 30, 47, 31,  2, 38,  0, 36,  7, -1, -1, 48, 49, -1, -2, 35,  2,  2,  5,  6,  4, -2,  2, -1,  0 };
+    int[] TOKEN_STATE = {-2,  0, 29, -1, -1, 36, 32, 33, 40, 38, 42, 39, 43, 41,  3,  3, 45, 44, 30, 46, 31,  2, 37,  0, 35,  7, -1, -1, 47, 48, -1, -2, 34,  2,  2,  5,  6,  4, -2,  2, -1,  0 };
 
     int[] SPECIAL_CASES_INDEXES =
-        { 0, 0, 0, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21 };
+        { 0, 0, 0, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21 };
 
     String[] SPECIAL_CASES_KEYS =
         {  "bin", "bool", "def", "do", "elif", "else", "end", "false", "float", "hexa", "if", "int", "listen", "main", "speak", "str", "toBin", "toHexa", "toInt", "true", "whileFalse" };
@@ -1256,14 +1256,11 @@ public interface ScannerConstants
 
     String[] SCANNER_ERROR =
     {
-        "Símbolo inválido",
+        "símbolo inválido",
         "",
         "",
-        "Constante string inválida ou não finalizada",
-        "",
-        "",
-        "",
-        "",
+        "constante string inválida ou não finalizada",
+        "constante binária ou hexadecimal inválida",
         "",
         "",
         "",
@@ -1282,12 +1279,15 @@ public interface ScannerConstants
         "",
         "",
         "",
-        "Constante binária inválida",
-        "Constante hexadecimal inválida",
+        "",
+        "",
+        "",
+        "constante binária inválida",
+        "constante hexadecimal inválida",
         "",
         "",
         "Erro identificando real",
-        "Erro identificando <ignorar>",
+        "comentário de bloco inválido ou não finalizado",
         "",
         "",
         "",
