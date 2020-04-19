@@ -1,7 +1,12 @@
 package Interface;
 
+import AnalisadorLexico.Classes;
+import AnalisadorLexico.Constants;
+import AnalisadorLexico.Lexico;
+import AnalisadorLexico.LexicalError;
+import AnalisadorLexico.Token;
 import Persistencia.CarregadorArquivos;
-import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.io.FileWriter;
 import javax.swing.JFileChooser;
@@ -54,7 +59,6 @@ public class Interface extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 900, 600));
         setMinimumSize(new java.awt.Dimension(920, 650));
-        setPreferredSize(new java.awt.Dimension(920, 650));
         setSize(new java.awt.Dimension(920, 650));
 
         Rolagem1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -218,6 +222,7 @@ public class Interface extends javax.swing.JFrame {
         Rolagem2.setMinimumSize(new java.awt.Dimension(900, 100));
 
         AreaMensagens.setColumns(20);
+        AreaMensagens.setFont(new Font("monospaced", Font.PLAIN, 18));
         AreaMensagens.setRows(5);
         AreaMensagens.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         AreaMensagens.setFocusable(false);
@@ -229,11 +234,11 @@ public class Interface extends javax.swing.JFrame {
 
         AreaStatus.setEditable(false);
         AreaStatus.setColumns(20);
+        AreaStatus.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         AreaStatus.setRows(5);
         AreaStatus.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         AreaStatus.setFocusable(false);
         AreaStatus.setMinimumSize(new java.awt.Dimension(900, 30));
-        AreaStatus.setPreferredSize(new java.awt.Dimension(220, 30));
 
         javax.swing.GroupLayout Painel2Layout = new javax.swing.GroupLayout(Painel2);
         Painel2.setLayout(Painel2Layout);
@@ -277,7 +282,71 @@ public class Interface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        AreaMensagens.setText("(compilação de programas ainda não foi implementada)");
+        Lexico lexico = new Lexico();
+        
+        
+        lexico.setInput(AreaTexto.getText());
+        String mensagem = "Linha     Classe                              Lexema                      \n";
+        char[] texto = AreaTexto.getText().toCharArray();
+
+        try {
+            Token t = null;
+            while ((t = lexico.nextToken()) != null) {
+                
+                //detecta linha
+                int linha = 1;
+                int trava = t.getPosition();
+                for(int i = 0; i < trava; i++){
+                    if(texto[i] == '\n'){
+                        linha++;
+                    }
+                }
+                
+                //Monta string com espaços certos
+                String linhastr = Integer.toString(linha);
+
+                for(int i=linhastr.length(); i < 10; i++){
+                    linhastr += " ";
+                }
+                mensagem += linhastr;
+                
+                //Classe
+                String classe = Integer.toString(t.getId());
+                
+                String classestr;
+                if(Classes.get(classe).getCodigo()[1] != null){
+                    classestr = Classes.get(classe).getCodigo()[1];
+                }else{
+                    classestr = Classes.get(classe).toString();
+                }
+                
+                
+                
+                for(int i= classestr.length(); i < 36; i++){
+                    classestr += " ";
+                }
+                
+                mensagem += classestr;
+                
+                //Lexema
+                String lexemastr = t.getLexeme();
+                for(int i=lexemastr.length(); i < 22; i++){
+                    lexemastr += " ";
+                }
+                
+                mensagem += lexemastr + "\n";
+                
+            }
+        } catch (LexicalError e) {
+            System.err.println(e.getMessage() + "& quote;,em & quote;" + e.getPosition());
+        }
+        
+        AreaMensagens.setText(mensagem);
+        
+        
+        
+        
+        
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -300,13 +369,13 @@ public class Interface extends javax.swing.JFrame {
             if (opc == JFileChooser.APPROVE_OPTION) {
                 try {
                     String nome = chooser.getSelectedFile().toString();
-                FileWriter fw;
-                if(nome.endsWith(".txt")){
-                     fw = new FileWriter(nome);
-                }else{
-                     fw = new FileWriter(nome + ".txt");
-                }
-                
+                    FileWriter fw;
+                    if (nome.endsWith(".txt")) {
+                        fw = new FileWriter(nome);
+                    } else {
+                        fw = new FileWriter(nome + ".txt");
+                    }
+
                     fw.write(AreaTexto.getText());
                     fw.close();
                 } catch (Exception ex) {
@@ -315,28 +384,28 @@ public class Interface extends javax.swing.JFrame {
                 AreaMensagens.setText("");
                 AreaStatus.setText(chooser.getSelectedFile().getPath());
             }
-        }else{
+        } else {
             try {
                 String nome = AreaStatus.getText();
                 FileWriter fw;
-                if(nome.endsWith(".txt")){
-                     fw = new FileWriter(AreaStatus.getText());
-                }else{
-                     fw = new FileWriter(AreaStatus.getText() + ".txt");
+                if (nome.endsWith(".txt")) {
+                    fw = new FileWriter(AreaStatus.getText());
+                } else {
+                    fw = new FileWriter(AreaStatus.getText() + ".txt");
                 }
-                    fw.write(AreaTexto.getText());
-                    fw.close();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                fw.write(AreaTexto.getText());
+                fw.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             AreaMensagens.setText("");
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        
+
         String str = AreaTexto.getSelectedText();
-        
+
         AreaTexto.getTransferHandler();
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -384,7 +453,7 @@ public class Interface extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -404,6 +473,7 @@ public class Interface extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Interface a = new Interface();
+                
                 a.setVisible(true);
 
             }
