@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Classes {
-    id(new String[] {"2", null}),
-    cte_int(new String[] {"3", null}),
-    real(new String[] {"4", null}),
-    cte_bin(new String[] {"5", null}),
-    cte_hexa(new String[] {"6", null}),
-    cte_str(new String[] {"7", null}),
+    identificador(new String[] {"2", null}),
+    constante_inteira(new String[] {"3", null}),
+    constante_real(new String[] {"4", null}),
+    constante_binária(new String[] {"5", null}),
+    constante_hexadecimal(new String[] {"6", null}),
+    constante_string(new String[] {"7", null}),
     principal(new String[] {"8", null}),
     dec_bin(new String[] {"9", null}),
     dec_bool(new String[] {"10", null}),

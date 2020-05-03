@@ -118,7 +118,7 @@ public class Interface extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 900, 600));
         setMinimumSize(new java.awt.Dimension(920, 650));
-        setSize(new java.awt.Dimension(920, 650));
+        setSize(new java.awt.Dimension(900, 650));
 
         Rolagem1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         Rolagem1.setToolTipText("");
@@ -281,7 +281,7 @@ public class Interface extends javax.swing.JFrame {
         Rolagem2.setMinimumSize(new java.awt.Dimension(900, 100));
 
         AreaMensagens.setColumns(20);
-        AreaMensagens.setFont(new Font("monospaced", Font.PLAIN, 18));
+        AreaMensagens.setFont(new Font("monospaced", Font.PLAIN, 14));
         AreaMensagens.setRows(5);
         AreaMensagens.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         AreaMensagens.setFocusable(false);
@@ -289,7 +289,6 @@ public class Interface extends javax.swing.JFrame {
         Rolagem2.setViewportView(AreaMensagens);
 
         Painel2.setMinimumSize(new java.awt.Dimension(900, 30));
-        Painel2.setPreferredSize(new java.awt.Dimension(900, 30));
 
         AreaStatus.setEditable(false);
         AreaStatus.setColumns(20);
@@ -323,7 +322,7 @@ public class Interface extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(Rolagem1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(Rolagem2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Painel2, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
+            .addComponent(Painel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,77 +340,90 @@ public class Interface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        Lexico lexico = new Lexico();
+        if (AreaTexto.getText().isEmpty()
+                | AreaTexto.getText().matches("[\n \t  ]*")) {
+            AreaMensagens.setText("nenhum programa para compilar");
+        } else {
+            Lexico lexico = new Lexico();
 
-        lexico.setInput(AreaTexto.getText());
-        String mensagem = "Linha     Classe                              Lexema                      \n";
-        char[] texto = AreaTexto.getText().toCharArray();
+            lexico.setInput(AreaTexto.getText());
+            String mensagem = "Linha     Classe                              Lexema                      \n";
+            char[] texto = AreaTexto.getText().toCharArray();
 
-        try {
-            Token t = null;
-            while ((t = lexico.nextToken()) != null) {
+            try {
+                Token t = null;
+                while ((t = lexico.nextToken()) != null) {
 
-                //detecta linha
+                    //detecta linha
+                    int linha = 1;
+                    int trava = t.getPosition();
+                    for (int i = 0; i < trava; i++) {
+                        if (texto[i] == '\n') {
+                            linha++;
+                        }
+                    }
+
+                    //Monta string com espaços certos
+                    String linhastr = Integer.toString(linha);
+
+                    for (int i = linhastr.length(); i < 10; i++) {
+                        linhastr += " ";
+                    }
+                    mensagem += linhastr;
+
+                    //Classe
+                    String classe = Integer.toString(t.getId());
+
+                    String classestr;
+                    if (Classes.get(classe).getCodigo()[1] != null) {
+                        classestr = "símbolo especial";
+                    } else {
+                        if (Integer.parseInt(Classes.get(classe).getCodigo()[0]) <= 7) {
+                            classestr = Classes.get(classe).toString();
+                            classestr = classestr.replace("_", " ");
+                        } else {
+                            classestr = "palavra reservada";
+                        }
+
+                    }
+
+                    for (int i = classestr.length(); i < 36; i++) {
+                        classestr += " ";
+                    }
+
+                    mensagem += classestr;
+
+                    //Lexema
+                    String lexemastr = t.getLexeme();
+                    for (int i = lexemastr.length(); i < 22; i++) {
+                        lexemastr += " ";
+                    }
+
+                    mensagem += lexemastr + "\n";
+
+                }
+                mensagem += "\nPrograma compilado com sucesso";
+                AreaMensagens.setText(mensagem);
+
+            } catch (LexicalError e) {
+
                 int linha = 1;
-                int trava = t.getPosition();
+                int trava = e.getPosition();
                 for (int i = 0; i < trava; i++) {
                     if (texto[i] == '\n') {
                         linha++;
                     }
                 }
 
-                //Monta string com espaços certos
-                String linhastr = Integer.toString(linha);
+                String mensagemErro = "Erro na linha " + linha + " - ";
 
-                for (int i = linhastr.length(); i < 10; i++) {
-                    linhastr += " ";
-                }
-                mensagem += linhastr;
-
-                //Classe
-                String classe = Integer.toString(t.getId());
-
-                String classestr;
-                if (Classes.get(classe).getCodigo()[1] != null) {
-                    classestr = Classes.get(classe).getCodigo()[1];
+                if (e.getMessage().equals("símbolo inválido")) {
+                    AreaMensagens.setText(mensagemErro + texto[e.getPosition()] + " " + e.getMessage());
                 } else {
-                    classestr = Classes.get(classe).toString();
-                }
-
-                for (int i = classestr.length(); i < 36; i++) {
-                    classestr += " ";
-                }
-
-                mensagem += classestr;
-
-                //Lexema
-                String lexemastr = t.getLexeme();
-                for (int i = lexemastr.length(); i < 22; i++) {
-                    lexemastr += " ";
-                }
-
-                mensagem += lexemastr + "\n";
-
-            }
-            AreaMensagens.setText(mensagem);
-
-        } catch (LexicalError e) {
-
-            int linha = 1;
-            int trava = e.getPosition();
-            for (int i = 0; i < trava; i++) {
-                if (texto[i] == '\n') {
-                    linha++;
+                    AreaMensagens.setText(mensagemErro + e.getMessage());
                 }
             }
 
-            String mensagemErro = "Erro na linha " + linha + " - ";
-
-            if (e.getMessage().equals("símbolo inválido")) {
-                AreaMensagens.setText(mensagemErro + texto[e.getPosition()] + " " + e.getMessage());
-            } else {
-                AreaMensagens.setText(mensagemErro + e.getMessage());
-            }
         }
 
     }//GEN-LAST:event_jButton13ActionPerformed
@@ -482,13 +494,10 @@ public class Interface extends javax.swing.JFrame {
         chooser.setFileFilter(filter);
         int returnVal = chooser.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            //        LinkedList<String> lista = CarregadorArquivos.carrega(chooser.getSelectedFile().getPath());
+
             String caminho = chooser.getSelectedFile().getPath();
             String lista = CarregadorArquivos.carrega(caminho);
             AreaTexto.setText(lista);
-//        while(!lista.isEmpty()){
-//            AreaTexto.append(lista.removeFirst() + "\n");
-//        }
             AreaTexto.setCaretPosition(0);
             AreaMensagens.setText("");
             AreaStatus.setText(caminho);
