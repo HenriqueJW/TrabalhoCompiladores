@@ -1252,7 +1252,7 @@ public interface ScannerConstants
         {  "bin", "bool", "def", "do", "elif", "else", "end", "false", "float", "hexa", "if", "int", "listen", "main", "speak", "str", "toBin", "toHexa", "toInt", "true", "whileFalse" };
 
     int[] SPECIAL_CASES_VALUES =
-        {  9, 10, 11, 16, 18, 19, 21, 22, 15, 12, 20, 13, 24, 8, 25, 14, 27, 28, 26, 23, 17 };
+        {  9, 10, 11, 16, 18, 19, 21, 22, 12, 13, 20, 14, 24, 8, 25, 15, 27, 28, 26, 23, 17 };
 
     String[] SCANNER_ERROR =
     {

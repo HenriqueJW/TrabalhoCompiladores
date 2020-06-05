@@ -4,6 +4,10 @@ import AnalisadorLexico.Classes;
 import AnalisadorLexico.Constants;
 import AnalisadorLexico.Lexico;
 import AnalisadorLexico.LexicalError;
+import AnalisadorLexico.SemanticError;
+import AnalisadorLexico.Semantico;
+import AnalisadorLexico.Sintatico;
+import AnalisadorLexico.SyntaticError;
 import AnalisadorLexico.Token;
 import Persistencia.CarregadorArquivos;
 import java.awt.Font;
@@ -11,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.FileWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ActionMap;
@@ -43,52 +49,7 @@ public class Interface extends javax.swing.JFrame {
         adicionaAtalhos();
     }
 
-    private void adicionaAtalhos() {
-        JPanel contentPane = (JPanel) this.getContentPane();
-        InputMap iMap = contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        ActionMap aMap = contentPane.getActionMap();
-
-        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK), "Ctrl + n");
-        aMap.put("Ctrl + n", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jButton4ActionPerformed(e);
-            }
-        });
-
-        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), "Ctrl + o");
-        aMap.put("Ctrl + o", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jButton7ActionPerformed(e);
-            }
-        });
-
-        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), "Ctrl + s");
-        aMap.put("Ctrl + s", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jButton9ActionPerformed(e);
-            }
-        });
-
-        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), "F9");
-        aMap.put("F9", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jButton13ActionPerformed(e);
-            }
-        });
-
-        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0), "F1");
-        aMap.put("F1", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jButton12ActionPerformed(e);
-            }
-        });
-
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -347,64 +308,14 @@ public class Interface extends javax.swing.JFrame {
             Lexico lexico = new Lexico();
 
             lexico.setInput(AreaTexto.getText());
-            String mensagem = "Linha     Classe                              Lexema                      \n";
+//            String mensagem = "Linha     Classe                              Lexema                      \n"; 
             char[] texto = AreaTexto.getText().toCharArray();
 
+            Sintatico analisadorSintatico = new Sintatico();
+
             try {
-                Token t = null;
-                while ((t = lexico.nextToken()) != null) {
-
-                    //detecta linha
-                    int linha = 1;
-                    int trava = t.getPosition();
-                    for (int i = 0; i < trava; i++) {
-                        if (texto[i] == '\n') {
-                            linha++;
-                        }
-                    }
-
-                    //Monta string com espaços certos
-                    String linhastr = Integer.toString(linha);
-
-                    for (int i = linhastr.length(); i < 10; i++) {
-                        linhastr += " ";
-                    }
-                    mensagem += linhastr;
-
-                    //Classe
-                    String classe = Integer.toString(t.getId());
-
-                    String classestr;
-                    if (Classes.get(classe).getCodigo()[1] != null) {
-                        classestr = "símbolo especial";
-                    } else {
-                        if (Integer.parseInt(Classes.get(classe).getCodigo()[0]) <= 7) {
-                            classestr = Classes.get(classe).toString();
-                            classestr = classestr.replace("_", " ");
-                        } else {
-                            classestr = "palavra reservada";
-                        }
-
-                    }
-
-                    for (int i = classestr.length(); i < 36; i++) {
-                        classestr += " ";
-                    }
-
-                    mensagem += classestr;
-
-                    //Lexema
-                    String lexemastr = t.getLexeme();
-                    for (int i = lexemastr.length(); i < 22; i++) {
-                        lexemastr += " ";
-                    }
-
-                    mensagem += lexemastr + "\n";
-
-                }
-                mensagem += "\nPrograma compilado com sucesso";
-                AreaMensagens.setText(mensagem);
-
+                analisadorSintatico.parse(lexico, new Semantico());
+                AreaMensagens.setText("Programa compilado com sucesso");
             } catch (LexicalError e) {
 
                 int linha = 1;
@@ -422,9 +333,33 @@ public class Interface extends javax.swing.JFrame {
                 } else {
                     AreaMensagens.setText(mensagemErro + e.getMessage());
                 }
-            }
+            } catch (SyntaticError e) {
+                
+                int linha = 1;
+                int trava = e.getPosition();
+                for (int i = 0; i < trava; i++) {
+                    if (texto[i] == '\n') {
+                        linha++;
+                    }
+                }
+                
+                
+                
+                
+                String mensagemErro = "Erro na linha " + linha + " - ";
+                String lexema = e.getToken().getLexeme();
+                if(lexema.equals("$")){
+                    lexema = "EOF";
+                }
+                AreaMensagens.setText(mensagemErro + e.getMessage().replaceAll("&", lexema));
 
+            } catch (SemanticError e) {
+                System.out.print(e);
+
+            }
+            
         }
+
 
     }//GEN-LAST:event_jButton13ActionPerformed
 
@@ -516,6 +451,54 @@ public class Interface extends javax.swing.JFrame {
         AreaStatus.setText("");
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void adicionaAtalhos() {
+        JPanel contentPane = (JPanel) this.getContentPane();
+        InputMap iMap = contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap aMap = contentPane.getActionMap();
+
+        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK), "Ctrl + n");
+        aMap.put("Ctrl + n", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jButton4ActionPerformed(e);
+            }
+        });
+
+        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), "Ctrl + o");
+        aMap.put("Ctrl + o", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jButton7ActionPerformed(e);
+            }
+        });
+
+        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), "Ctrl + s");
+        aMap.put("Ctrl + s", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jButton9ActionPerformed(e);
+            }
+        });
+
+        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0), "F9");
+        aMap.put("F9", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jButton13ActionPerformed(e);
+            }
+        });
+
+        iMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0), "F1");
+        aMap.put("F1", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jButton12ActionPerformed(e);
+            }
+        });
+
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

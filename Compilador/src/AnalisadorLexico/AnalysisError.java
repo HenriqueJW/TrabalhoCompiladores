@@ -3,11 +3,19 @@ package AnalisadorLexico;
 public class AnalysisError extends Exception
 {
     private int position;
+    private Token token;
 
     public AnalysisError(String msg, int position)
     {
         super(msg);
         this.position = position;
+    }
+    
+    public AnalysisError(String msg, int position, Token token)
+    {
+        super(msg);
+        this.position = position;
+        this.token = token;
     }
 
     public AnalysisError(String msg)
@@ -20,6 +28,12 @@ public class AnalysisError extends Exception
     {
         return position;
     }
+
+    public Token getToken() {
+        return token;
+    }
+    
+    
 
     public String toString()
     {

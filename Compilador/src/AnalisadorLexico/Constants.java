@@ -1,6 +1,5 @@
 package AnalisadorLexico;
-
-public interface Constants extends ScannerConstants
+public interface Constants extends ScannerConstants, ParserConstants
 {
     int EPSILON  = 0;
     int DOLLAR   = 1;
@@ -15,10 +14,10 @@ public interface Constants extends ScannerConstants
     int t_dec_bin = 9;
     int t_dec_bool = 10;
     int t_dec_def = 11;
-    int t_dec_hexa = 12;
-    int t_dec_int = 13;
-    int t_dec_str = 14;
-    int t_dec_float = 15;
+    int t_dec_float = 12;
+    int t_dec_hexa = 13;
+    int t_dec_int = 14;
+    int t_dec_str = 15;
     int t_laco_do = 16;
     int t_laco_whileFalse = 17;
     int t_cond_elif = 18;

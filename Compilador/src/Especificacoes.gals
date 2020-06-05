@@ -1,0 +1,93 @@
+#Options
+GenerateScanner = true
+GenerateParser = false
+Language = Java
+ScannerName = Lexico
+ScannerCaseSensitive = true
+ScannerTable = Full
+Input = Stream
+#RegularDefinitions
+letraMaiuscula: [A-Z]
+letraMinuscula: [a-z]
+letra: {letraMaiuscula} | {letraMinuscula}
+digito: [0-9]
+digitoSemZero: [1-9]
+binario: 0 | 1
+hexadecimal: {digito} | [a-f]
+comentario_linha: "!" "!" [^\n]*
+comentario_bloco: "<" "!" ([^"!"] | "!"+[^"!"">"])* "!"+ ">"
+#Tokens
+//tokens
+id: ({letra}) ({digito} | {letra} )* ("_")? (( {digito} | {letra})+ ("_")?)*
+
+cte_int: 0 | {digitoSemZero} {digito}*
+
+real: (0 | {digitoSemZero} {digito}*) \. (0 | {digito}* {digitoSemZero} )
+
+cte_bin: "#" (b | B) {binario}+
+
+cte_hexa: "#" (x | X) {hexadecimal}+
+
+cte_str:  \" ([^ \" \n \\ ])*  \"
+
+
+//palavras reservadas
+principal = id: "main"
+
+dec_bin = id: "bin"
+dec_bool = id: "bool"
+dec_def = id: "def"
+dec_hexa = id: "hexa"
+dec_int = id: "int"
+dec_str = id: "str"
+
+laco_do = id: "do"
+laco_whileFalse = id: "whileFalse"
+
+cond_elif = id: "elif"
+cond_else = id: "else"
+cond_if = id: "if"
+
+fim_end = id: "end"
+
+bool_false = id: "false"
+bool_true = id: "true"
+
+
+com_listen = id: "listen"
+com_speak = id: "speak"
+com_toInt = id: "toInt"
+com_toBin = id: "toBin"
+com_toHexa = id: "toHexa"
+
+
+//caracteres especiais
+"!"
+"<"
+">"
+"(" 
+")" 
+"=="
+"!="
+"&"
+"|" 
+"!" 
+"+" 
+"-" 
+"*" 
+"/" 
+"," 
+"." 
+";" 
+":" 
+"="
+"+="
+"-=" 
+
+:!{comentario_linha}
+:!{comentario_bloco}
+:[\s \t \n]
+
+
+
+
