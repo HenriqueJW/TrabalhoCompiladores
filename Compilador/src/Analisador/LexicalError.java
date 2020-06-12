@@ -1,4 +1,4 @@
-package AnalisadorLexico;
+package Analisador;
 
 public class LexicalError extends AnalysisError
 {

@@ -1,15 +1,15 @@
 package Interface;
 
-import AnalisadorLexico.AnalysisError;
-import AnalisadorLexico.Classes;
-import AnalisadorLexico.Constants;
-import AnalisadorLexico.Lexico;
-import AnalisadorLexico.LexicalError;
-import AnalisadorLexico.SemanticError;
-import AnalisadorLexico.Semantico;
-import AnalisadorLexico.Sintatico;
-import AnalisadorLexico.SyntaticError;
-import AnalisadorLexico.Token;
+import Analisador.AnalysisError;
+import Analisador.Classes;
+import Analisador.Constants;
+import Analisador.Lexico;
+import Analisador.LexicalError;
+import Analisador.SemanticError;
+import Analisador.Semantico;
+import Analisador.Sintatico;
+import Analisador.SyntaticError;
+import Analisador.Token;
 import Persistencia.CarregadorArquivos;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
