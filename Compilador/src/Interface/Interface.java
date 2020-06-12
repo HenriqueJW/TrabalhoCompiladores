@@ -1,5 +1,6 @@
 package Interface;
 
+import AnalisadorLexico.AnalysisError;
 import AnalisadorLexico.Classes;
 import AnalisadorLexico.Constants;
 import AnalisadorLexico.Lexico;
@@ -305,28 +306,21 @@ public class Interface extends javax.swing.JFrame {
                 | AreaTexto.getText().matches("[\n \t  ]*")) {
             AreaMensagens.setText("nenhum programa para compilar");
         } else {
+            
             Lexico lexico = new Lexico();
-
             lexico.setInput(AreaTexto.getText());
-//            String mensagem = "Linha     Classe                              Lexema                      \n"; 
+            Sintatico analisadorSintatico = new Sintatico();
+            
             char[] texto = AreaTexto.getText().toCharArray();
 
-            Sintatico analisadorSintatico = new Sintatico();
+
 
             try {
                 analisadorSintatico.parse(lexico, new Semantico());
                 AreaMensagens.setText("Programa compilado com sucesso");
             } catch (LexicalError e) {
-
-                int linha = 1;
-                int trava = e.getPosition();
-                for (int i = 0; i < trava; i++) {
-                    if (texto[i] == '\n') {
-                        linha++;
-                    }
-                }
-
-                String mensagemErro = "Erro na linha " + linha + " - ";
+                
+                String mensagemErro = descobreLinhaDeToken(e, texto);
 
                 if (e.getMessage().equals("símbolo inválido")) {
                     AreaMensagens.setText(mensagemErro + texto[e.getPosition()] + " " + e.getMessage());
@@ -334,24 +328,15 @@ public class Interface extends javax.swing.JFrame {
                     AreaMensagens.setText(mensagemErro + e.getMessage());
                 }
             } catch (SyntaticError e) {
+                                
+                String mensagemErro = descobreLinhaDeToken(e, texto);
                 
-                int linha = 1;
-                int trava = e.getPosition();
-                for (int i = 0; i < trava; i++) {
-                    if (texto[i] == '\n') {
-                        linha++;
-                    }
-                }
-                
-                
-                
-                
-                String mensagemErro = "Erro na linha " + linha + " - ";
                 String lexema = e.getToken().getLexeme();
                 if(lexema.equals("$")){
                     lexema = "EOF";
                 }
-                AreaMensagens.setText(mensagemErro + e.getMessage().replaceAll("&", lexema));
+                
+                AreaMensagens.setText(mensagemErro + e.getMessage().replaceAll("¨", lexema));
 
             } catch (SemanticError e) {
                 System.out.print(e);
@@ -498,6 +483,16 @@ public class Interface extends javax.swing.JFrame {
 
     }
     
+    private String descobreLinhaDeToken(AnalysisError e, char[] texto){
+                int linha = 1;
+                int posicao = e.getPosition();
+                for (int i = 0; i < posicao; i++) {
+                    if (texto[i] == '\n') {
+                        linha++;
+                    }
+                }
+                return "Erro na linha " + linha + " - ";
+                }
     
     /**
      * @param args the command line arguments

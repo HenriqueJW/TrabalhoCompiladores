@@ -5,7 +5,7 @@
         <group>
             <file>file:/C:/Users/Micro/Documents/NetBeansProjects/TrabalhoCompiladores/Compilador/src/Interface/Interface.java</file>
             <file>file:/C:/Users/Micro/Documents/NetBeansProjects/TrabalhoCompiladores/Compilador/src/AnalisadorLexico/Sintatico.java</file>
-            <file>file:/C:/Users/Micro/Documents/NetBeansProjects/TrabalhoCompiladores/Compilador/src/AnalisadorLexico/ScannerConstants.java</file>
+            <file>file:/C:/Users/Micro/Documents/NetBeansProjects/TrabalhoCompiladores/Compilador/src/AnalisadorLexico/SemanticError.java</file>
             <file>file:/C:/Users/Micro/Documents/NetBeansProjects/TrabalhoCompiladores/Compilador/src/AnalisadorLexico/ParserConstants.java</file>
         </group>
     </open-files>
