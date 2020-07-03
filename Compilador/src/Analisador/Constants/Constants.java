@@ -1,4 +1,4 @@
-package Analisador;
+package Analisador.Constants;
 public interface Constants extends ScannerConstants, ParserConstants
 {
     int EPSILON  = 0;

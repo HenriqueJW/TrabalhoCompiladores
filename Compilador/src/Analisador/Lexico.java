@@ -1,5 +1,8 @@
 package Analisador;
 
+import Analisador.Constants.Constants;
+import Analisador.Erros.LexicalError;
+
 public class Lexico implements Constants
 {
     private int position;

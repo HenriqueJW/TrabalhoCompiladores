@@ -1,21 +1,25 @@
 package Interface;
 
-import Analisador.AnalysisError;
-import Analisador.Classes;
-import Analisador.Constants;
+import Analisador.Erros.AnalysisError;
+import Analisador.Modelos.Classes;
+import Analisador.Constants.Constants;
 import Analisador.Lexico;
-import Analisador.LexicalError;
-import Analisador.SemanticError;
+import Analisador.Erros.LexicalError;
+import Analisador.Erros.SemanticError;
 import Analisador.Semantico;
 import Analisador.Sintatico;
-import Analisador.SyntaticError;
+import Analisador.Erros.SyntaticError;
 import Analisador.Token;
 import Persistencia.CarregadorArquivos;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -49,8 +53,6 @@ public class Interface extends javax.swing.JFrame {
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Interface/Imagens/32/compile-icon.png")).getImage());
         adicionaAtalhos();
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -306,20 +308,29 @@ public class Interface extends javax.swing.JFrame {
                 | AreaTexto.getText().matches("[\n \t  ]*")) {
             AreaMensagens.setText("nenhum programa para compilar");
         } else {
-            
+
             Lexico lexico = new Lexico();
             lexico.setInput(AreaTexto.getText());
             Sintatico analisadorSintatico = new Sintatico();
-            
+
             char[] texto = AreaTexto.getText().toCharArray();
 
-
-
             try {
-                analisadorSintatico.parse(lexico, new Semantico());
+                Semantico s = new Semantico();
+                analisadorSintatico.parse(lexico, s);
                 AreaMensagens.setText("Programa compilado com sucesso");
+                final File file = new File("CODIGOGERADO.txt");
+                file.createNewFile();
+                PrintWriter writer;
+                writer = new PrintWriter(file, "UTF-8");
+                ArrayList<String> codigo = s.getCodigo();
+                for(String linha : codigo){
+                    writer.write(linha);
+                }
+                writer.close();
+
             } catch (LexicalError e) {
-                
+
                 String mensagemErro = descobreLinhaDeToken(e, texto);
 
                 if (e.getMessage().equals("símbolo inválido")) {
@@ -328,21 +339,23 @@ public class Interface extends javax.swing.JFrame {
                     AreaMensagens.setText(mensagemErro + e.getMessage());
                 }
             } catch (SyntaticError e) {
-                                
+
                 String mensagemErro = descobreLinhaDeToken(e, texto);
-                
+
                 String lexema = e.getToken().getLexeme();
-                if(lexema.equals("$")){
+                if (lexema.equals("$")) {
                     lexema = "EOF";
                 }
-                
+
                 AreaMensagens.setText(mensagemErro + e.getMessage().replaceAll("¨", lexema));
 
             } catch (SemanticError e) {
                 System.out.print(e);
 
+            } catch (IOException ex) {
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
 
 
@@ -482,18 +495,18 @@ public class Interface extends javax.swing.JFrame {
         });
 
     }
-    
-    private String descobreLinhaDeToken(AnalysisError e, char[] texto){
-                int linha = 1;
-                int posicao = e.getPosition();
-                for (int i = 0; i < posicao; i++) {
-                    if (texto[i] == '\n') {
-                        linha++;
-                    }
-                }
-                return "Erro na linha " + linha + " - ";
-                }
-    
+
+    private String descobreLinhaDeToken(AnalysisError e, char[] texto) {
+        int linha = 1;
+        int posicao = e.getPosition();
+        for (int i = 0; i < posicao; i++) {
+            if (texto[i] == '\n') {
+                linha++;
+            }
+        }
+        return "Erro na linha " + linha + " - ";
+    }
+
     /**
      * @param args the command line arguments
      */

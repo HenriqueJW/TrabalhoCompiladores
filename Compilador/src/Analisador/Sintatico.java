@@ -1,6 +1,10 @@
 package Analisador;
 
 
+import Analisador.Constants.Constants;
+import Analisador.Erros.SemanticError;
+import Analisador.Erros.SyntaticError;
+import Analisador.Erros.LexicalError;
 import java.util.Stack;
 
 public class Sintatico implements Constants
@@ -107,4 +111,6 @@ public class Sintatico implements Constants
         while ( ! step() )
             ;
     }
+    
+   
 }

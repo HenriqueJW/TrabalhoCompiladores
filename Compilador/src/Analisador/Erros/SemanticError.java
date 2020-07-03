@@ -1,4 +1,4 @@
-package Analisador;
+package Analisador.Erros;
 
 public class SemanticError extends AnalysisError
 {

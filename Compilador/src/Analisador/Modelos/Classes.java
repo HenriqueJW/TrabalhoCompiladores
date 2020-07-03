@@ -1,4 +1,4 @@
-package Analisador;
+package Analisador.Modelos;
 
 import java.util.HashMap;
 import java.util.Map;

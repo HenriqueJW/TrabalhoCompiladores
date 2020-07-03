@@ -1,4 +1,6 @@
-package Analisador;
+package Analisador.Erros;
+
+import Analisador.Token;
 
 public class SyntaticError extends AnalysisError
 {

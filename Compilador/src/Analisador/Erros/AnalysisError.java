@@ -1,4 +1,6 @@
-package Analisador;
+package Analisador.Erros;
+
+import Analisador.Token;
 
 public class AnalysisError extends Exception
 {
@@ -10,7 +12,7 @@ public class AnalysisError extends Exception
         super(msg);
         this.position = position;
     }
-    
+
     public AnalysisError(String msg, int position, Token token)
     {
         super(msg);
