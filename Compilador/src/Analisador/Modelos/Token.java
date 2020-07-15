@@ -1,4 +1,4 @@
-package Analisador;
+package Analisador.Modelos;
 
 public class Token
 {

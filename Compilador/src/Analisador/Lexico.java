@@ -1,5 +1,6 @@
 package Analisador;
 
+import Analisador.Modelos.Token;
 import Analisador.Constants.Constants;
 import Analisador.Erros.LexicalError;
 

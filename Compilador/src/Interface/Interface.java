@@ -9,7 +9,7 @@ import Analisador.Erros.SemanticError;
 import Analisador.Semantico;
 import Analisador.Sintatico;
 import Analisador.Erros.SyntaticError;
-import Analisador.Token;
+import Analisador.Modelos.Token;
 import Persistencia.CarregadorArquivos;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -319,12 +319,15 @@ public class Interface extends javax.swing.JFrame {
                 Semantico s = new Semantico();
                 analisadorSintatico.parse(lexico, s);
                 AreaMensagens.setText("Programa compilado com sucesso");
-                final File file = new File("CODIGOGERADO.txt");
+                final File file = new File(
+                        AreaStatus.getText().replace(".txt", ".il").equals("")
+                        ? System.getProperty("user.home") + "/Desktop/CodigoGerado.il"
+                        : AreaStatus.getText().replace(".txt", ".il"));
                 file.createNewFile();
                 PrintWriter writer;
                 writer = new PrintWriter(file, "UTF-8");
                 ArrayList<String> codigo = s.getCodigo();
-                for(String linha : codigo){
+                for (String linha : codigo) {
                     writer.write(linha);
                 }
                 writer.close();

@@ -1,6 +1,6 @@
 package Analisador.Erros;
 
-import Analisador.Token;
+import Analisador.Modelos.Token;
 
 public class AnalysisError extends Exception
 {
