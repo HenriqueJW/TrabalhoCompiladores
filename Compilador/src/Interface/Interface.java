@@ -1,15 +1,12 @@
 package Interface;
 
 import Analisador.Erros.AnalysisError;
-import Analisador.Modelos.Classes;
-import Analisador.Constants.Constants;
 import Analisador.Lexico;
 import Analisador.Erros.LexicalError;
 import Analisador.Erros.SemanticError;
 import Analisador.Semantico;
 import Analisador.Sintatico;
 import Analisador.Erros.SyntaticError;
-import Analisador.Modelos.Token;
 import Persistencia.CarregadorArquivos;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -23,7 +20,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;

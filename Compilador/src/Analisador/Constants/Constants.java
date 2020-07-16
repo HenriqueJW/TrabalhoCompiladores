@@ -4,52 +4,52 @@ public interface Constants extends ScannerConstants, ParserConstants
     int EPSILON  = 0;
     int DOLLAR   = 1;
 
-    int t_id = 2;
-    int t_cte_int = 3;
-    int t_real = 4;
-    int t_cte_bin = 5;
-    int t_cte_hexa = 6;
-    int t_cte_str = 7;
-    int t_principal = 8;
-    int t_dec_bin = 9;
-    int t_dec_bool = 10;
-    int t_dec_def = 11;
-    int t_dec_float = 12;
-    int t_dec_hexa = 13;
-    int t_dec_int = 14;
-    int t_dec_str = 15;
-    int t_laco_do = 16;
-    int t_laco_whileFalse = 17;
-    int t_cond_elif = 18;
-    int t_cond_else = 19;
-    int t_cond_if = 20;
-    int t_fim_end = 21;
-    int t_bool_false = 22;
-    int t_bool_true = 23;
-    int t_com_listen = 24;
-    int t_com_speak = 25;
-    int t_com_toInt = 26;
-    int t_com_toBin = 27;
-    int t_com_toHexa = 28;
-    int t_TOKEN_29 = 29; //"!"
-    int t_TOKEN_30 = 30; //"<"
-    int t_TOKEN_31 = 31; //">"
-    int t_TOKEN_32 = 32; //"("
-    int t_TOKEN_33 = 33; //")"
-    int t_TOKEN_34 = 34; //"=="
-    int t_TOKEN_35 = 35; //"!="
-    int t_TOKEN_36 = 36; //"&"
-    int t_TOKEN_37 = 37; //"|"
-    int t_TOKEN_38 = 38; //"+"
-    int t_TOKEN_39 = 39; //"-"
-    int t_TOKEN_40 = 40; //"*"
-    int t_TOKEN_41 = 41; //"/"
-    int t_TOKEN_42 = 42; //","
-    int t_TOKEN_43 = 43; //"."
-    int t_TOKEN_44 = 44; //";"
-    int t_TOKEN_45 = 45; //":"
-    int t_TOKEN_46 = 46; //"="
-    int t_TOKEN_47 = 47; //"+="
-    int t_TOKEN_48 = 48; //"-="
+    int id = 2;
+    int cte_int = 3;
+    int real = 4;
+    int cte_bin = 5;
+    int cte_hexa = 6;
+    int cte_str = 7;
+    int principal = 8;
+    int dec_bin = 9;
+    int dec_bool = 10;
+    int dec_def = 11;
+    int dec_float = 12;
+    int dec_hexa = 13;
+    int dec_int = 14;
+    int dec_str = 15;
+    int laco_do = 16;
+    int laco_whileFalse = 17;
+    int cond_elif = 18;
+    int cond_else = 19;
+    int cond_if = 20;
+    int fim_end = 21;
+    int bool_false = 22;
+    int bool_true = 23;
+    int com_listen = 24;
+    int com_speak = 25;
+    int com_toInt = 26;
+    int com_toBin = 27;
+    int com_toHexa = 28;
+    int TOKEN_29 = 29; //"!"
+    int TOKEN_30 = 30; //"<"
+    int TOKEN_31 = 31; //">"
+    int TOKEN_32 = 32; //"("
+    int TOKEN_33 = 33; //")"
+    int TOKEN_34 = 34; //"=="
+    int TOKEN_35 = 35; //"!="
+    int TOKEN_36 = 36; //"&"
+    int TOKEN_37 = 37; //"|"
+    int TOKEN_38 = 38; //"+"
+    int TOKEN_39 = 39; //"-"
+    int TOKEN_40 = 40; //"*"
+    int TOKEN_41 = 41; //"/"
+    int TOKEN_42 = 42; //","
+    int TOKEN_43 = 43; //"."
+    int TOKEN_44 = 44; //";"
+    int TOKEN_45 = 45; //":"
+    int TOKEN_46 = 46; //"="
+    int TOKEN_47 = 47; //"+="
+    int TOKEN_48 = 48; //"-="
 
 }
